@@ -151,6 +151,21 @@ namespace CashPoint.Controllers
             return _context.Customers.Any(e => e.Id == id);
         }
 
+        public async Task<IActionResult> Withdraw(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            return View(customer);
+        }
+
         [HttpPost, ActionName("Withdraw")]
         [Route("{amount}")]
         [ValidateAntiForgeryToken]
