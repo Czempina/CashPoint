@@ -5,17 +5,20 @@
     ViewData["Title"] = "Error";
 }
 
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item)
-            </td>
-        </tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item)
+        </td>
+    </tr>
 }
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href='javascript:history.go(-1)'>Return</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

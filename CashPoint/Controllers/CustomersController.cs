@@ -21,9 +21,15 @@ namespace CashPoint.Controllers
         }
 
         // GET: Customers
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index(Customer customer)
+        //{
+        //    return View(customer);
+        //}
+
+        public async Task<IActionResult> Index(int customerId)
         {
-            return View(await _context.Customers.ToListAsync());
+            var customer = _context.Customers.Where(x => x.Id == customerId).FirstOrDefault();
+            return View(customer);
         }
 
         public async Task<IActionResult> Login()
@@ -33,8 +39,12 @@ namespace CashPoint.Controllers
 
         public async Task<IActionResult> CheckUser(string name, string pass)
         {
-            var customer = _context.Customers.Where(x => x.Name == name && x.Password == pass);
-            return View("Index",await _context.Customers.ToListAsync());
+            var customer = _context.Customers.Where(x => x.Name == name && x.Password == pass).FirstOrDefault();
+            if(customer == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+            return View("Index", customer);
         }
 
         // GET: Customers/Details/5
@@ -176,6 +186,7 @@ namespace CashPoint.Controllers
             }
             return View(customer);
         }
+
 
         [HttpPost, ActionName("Withdraw")]
         [Route("{amount}")]

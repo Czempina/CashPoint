@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CashPoint.Models.Customer>
+﻿@model CashPoint.Models.Customer
 
 @{
     ViewData["Title"] = "Index";
@@ -25,23 +25,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => Model.Name)
             </td>
             <td style="-webkit-text-security: disc;">
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => Model.Password)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AccountBalance)
+                @Html.DisplayFor(modelItem => Model.AccountBalance)
             </td>
             <td>
-                <a asp-action="Withdraw" asp-route-id="@item.Id">Withdraw Money</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Withdraw" asp-route-id="@Model.Id">Withdraw Money</a> |
+                <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
             </td>
         </tr>
-}
     </tbody>
 </table>
