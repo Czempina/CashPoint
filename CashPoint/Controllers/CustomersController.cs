@@ -26,6 +26,17 @@ namespace CashPoint.Controllers
             return View(await _context.Customers.ToListAsync());
         }
 
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CheckUser(string name, string pass)
+        {
+            var customer = _context.Customers.Where(x => x.Name == name && x.Password == pass);
+            return View("Index",await _context.Customers.ToListAsync());
+        }
+
         // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
